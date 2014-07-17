@@ -9,6 +9,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     JIFGestionarPersona pers;
     JIFGestionarInstitucion inst;
     JIFGestionarLocal loc;
+    JIFGestionarApoderado apod;
     gestBanco banc;
     gestCuentaBancaria cuentaBan;
 
@@ -49,6 +50,11 @@ public class JFPrincipal extends javax.swing.JFrame {
         jMenu1.add(mnu_GPersona);
 
         mnu_GApoderado.setText("Apoderado");
+        mnu_GApoderado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_GApoderadoActionPerformed(evt);
+            }
+        });
         jMenu1.add(mnu_GApoderado);
 
         mnu_GPersonal.setText("Personal");
@@ -102,11 +108,11 @@ public class JFPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
+            .addComponent(panelEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 1186, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+            .addComponent(panelEscritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
         );
 
         pack();
@@ -166,6 +172,17 @@ public class JFPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, mensaje);
         }
     }//GEN-LAST:event_mnu_GCuentaBancariaActionPerformed
+
+    private void mnu_GApoderadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_GApoderadoActionPerformed
+        // TODO add your handling code here:
+        if (estaCerrado(apod) == true) {
+            apod = new JIFGestionarApoderado();
+            panelEscritorio.add(apod);
+            apod.show();
+        } else {
+            JOptionPane.showMessageDialog(this, mensaje);
+        }
+    }//GEN-LAST:event_mnu_GApoderadoActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

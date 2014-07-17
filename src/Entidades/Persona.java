@@ -10,7 +10,7 @@ public class Persona {
     private char sexo;
     private String tipoDocumento;
     private String numeroDocumento;
-    private char estadoCivil;
+    private String estadoCivil;
     private String telefono;
     private String movil;
     private String correo;
@@ -18,7 +18,7 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(String apellidos, String nombres, Date fechaNacimiento, char sexo, String tipoDocumento, String numeroDocumento, char estadoCivil, String telefono, String movil, String correo) {
+    public Persona(String apellidos, String nombres, Date fechaNacimiento, char sexo, String tipoDocumento, String numeroDocumento, String estadoCivil, String telefono, String movil, String correo) {
         this.apellidos = apellidos;
         this.nombres = nombres;
         this.fechaNacimiento = fechaNacimiento;
@@ -87,11 +87,11 @@ public class Persona {
         this.numeroDocumento = numeroDocumento;
     }
 
-    public char getEstadoCivil() {
+    public String getEstadoCivil() {
         return estadoCivil;
     }
 
-    public void setEstadoCivil(char estadoCivil) {
+    public void setEstadoCivil(String estadoCivil) {
         this.estadoCivil = estadoCivil;
     }
 

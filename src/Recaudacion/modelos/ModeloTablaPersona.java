@@ -81,4 +81,5 @@ public class ModeloTablaPersona extends AbstractTableModel {
         }
         return objP;
     }
+
 }

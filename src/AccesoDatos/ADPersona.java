@@ -113,10 +113,10 @@ public class ADPersona {
                 objP.setApellidos(rs.getString("apellidos"));
                 objP.setNombres(rs.getString("nombres"));
                 objP.setFechaNacimiento(rs.getDate("fechanacimiento"));
-                //objP.setSexo(rs.getCharacterStream("sexo"));
+                objP.setSexo(rs.getString("sexo").charAt(0));
                 objP.setTipoDocumento(rs.getString("tipodocumento"));
                 objP.setNumeroDocumento(rs.getString("numerodocumento"));
-                //objP.setEstadoCivil(rs.getCharacterStream("estadocivil"));
+                objP.setEstadoCivil(rs.getString("estadocivil"));
                 objP.setTelefono(rs.getString("telefono"));
                 objP.setMovil(rs.getString("movil"));
                 objP.setCorreo(rs.getString("correo"));

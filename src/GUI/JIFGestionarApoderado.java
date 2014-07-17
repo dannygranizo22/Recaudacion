@@ -1,6 +1,9 @@
 package GUI;
 
+import AccesoDatos.ADApoderado;
+import Entidades.Apoderado;
 import Recaudacion.modelos.ModeloTablaApoderado;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
@@ -8,6 +11,8 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
     private ModeloTablaApoderado mtA;
     
     public JIFGestionarApoderado() {
+        mtA = new ModeloTablaApoderado();
+        this.listar();
         initComponents();
     }
 
@@ -190,7 +195,7 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
                         .addComponent(btnNuevo)
                         .addGap(148, 148, 148)
                         .addComponent(btnRegistrar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(btnSalir)
                 .addContainerGap())
         );
@@ -223,4 +228,20 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtProfesion;
     // End of variables declaration//GEN-END:variables
+
+    private void listar() {
+        ADApoderado ADApod = new ADApoderado();
+        List<Apoderado> apoderados;
+
+        try {
+            apoderados = ADApod.listar();
+            this.mtA.setApoderados(apoderados);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ADApod = null;
+        }
+
+    
+    }
 }

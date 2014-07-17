@@ -12,7 +12,9 @@ import javax.swing.JOptionPane;
  * @author RaulSilva
  */
 public class JFLogin extends javax.swing.JFrame {
+
     Sql sql = new Sql();
+
     /**
      * Creates new form JFLogin
      */
@@ -113,25 +115,23 @@ public class JFLogin extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         String Usuario = txtUsuario.getText();
-        String Contraseña = txtPassword.getText();
+        String Contraseña = String.valueOf( txtPassword.getPassword());
 
         if (sql.existe("persona", "numerodocumento", Usuario)) {
             String data[] = sql.getDatosUsuarios(Usuario);
             if (String.valueOf(Contraseña).compareTo(data[0]) == 0) {
-                JOptionPane.showMessageDialog(this, "Acceso al Sistema: "+ data[0]);
+                JOptionPane.showMessageDialog(this, "Acceso al Sistema: " + data[0]);
                 JFPrincipal principal = new JFPrincipal();
                 principal.setVisible(true);
                 this.setVisible(false);
                 /*if (String.valueOf(Usuario).compareTo("admin")==0) {
-                    principal.setMnuAdministrar();
-                }*/
-
+                 principal.setMnuAdministrar();
+                 }*/
             } else {
                 JOptionPane.showMessageDialog(this, "Contraseña Incorrecta");
                 txtPassword.setText("");
                 txtPassword.requestFocus();
             }
-
         } else {
             JOptionPane.showMessageDialog(this, "Usuario no Registrado");
             txtUsuario.setText("");

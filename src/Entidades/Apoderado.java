@@ -1,7 +1,8 @@
 package Entidades;
 
-public class Apoderado {
-    private int codigopersona;
+public class Apoderado
+        extends Persona {
+
     private boolean vive;
     private boolean viveConEstudiante;
     private String centroLaboral;
@@ -16,12 +17,7 @@ public class Apoderado {
         this.cargo = cargo;
     }
 
-    public int getCodigopersona() {
-        return codigopersona;
-    }
-
-    public void setCodigopersona(int codigopersona) {
-        this.codigopersona = codigopersona;
+    public Apoderado() {
     }
 
     public boolean isVive() {
@@ -63,5 +59,4 @@ public class Apoderado {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-    
 }
