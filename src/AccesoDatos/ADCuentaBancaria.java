@@ -42,13 +42,13 @@ public class ADCuentaBancaria {
             statement.executeUpdate(SentenciaSQL);
             /*cs = BD.Conectar().prepareCall("{ call fu_icuentabancaria(?,?,?,?,?,?) }");
             cs.setString(1, objCB.getNumero());
-            cs.setDate(2,objCB.getFechaApertura());
+            cs.setDate(2, new java.sql.Date(objCB.getFechaApertura().getTime()));
             cs.setString(3, objCB.getDenominacion());
             cs.setDouble(4, objCB.getMontoInicial());
             cs.setString(5, objCB.getCodigoInterbancario());
-            cs.setInt(6, Integer.parseInt(objCB.getBanco().getCodigo()));
-            cs.executeQuery();*/
-            
+            cs.setInt(6, Integer.parseInt(objCB.getBanco().getCodigo().toString()));
+            cs.executeQuery();
+            */
             ok = true;
         } catch (Exception e) {
             throw e;
