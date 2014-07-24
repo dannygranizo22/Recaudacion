@@ -54,7 +54,7 @@
                   <Component id="jPanel1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnSalir" pref="66" max="32767" attributes="0"/>
+              <Component id="btnSalir" pref="70" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -215,9 +215,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNombres">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombresActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel22">
           <Properties>
@@ -267,9 +264,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCorreo">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCorreoActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="opcMasculino">
           <Properties>
@@ -278,9 +272,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Masculino"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="opcMasculinoActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel27">
           <Properties>
@@ -298,9 +289,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtApellidos">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtApellidosActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTelefono">
         </Component>
@@ -312,9 +300,6 @@
         <Component class="javax.swing.JTextField" name="txtMovil">
         </Component>
         <Component class="javax.swing.JTextField" name="txtNumDocumento">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNumDocumentoActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cboTipoDoc">
           <Properties>

@@ -17,6 +17,7 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
     public JIFGestionarApoderado() {
         mtA = new ModeloTablaApoderado();
         this.listar();
+        this.iniciarComponentes();
         initComponents();
     }
 
@@ -31,8 +32,8 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
         txtProfesion = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtCargo = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        chkVive = new javax.swing.JCheckBox();
+        chkViveConEstudiante = new javax.swing.JCheckBox();
         jLabel21 = new javax.swing.JLabel();
         txtNombres = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
@@ -74,11 +75,11 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Cargo");
 
-        jCheckBox1.setSelected(true);
-        jCheckBox1.setText("El Apoderado está con vida");
+        chkVive.setSelected(true);
+        chkVive.setText("El Apoderado está con vida");
 
-        jCheckBox2.setSelected(true);
-        jCheckBox2.setText("El Apoderado vive con el estudiante");
+        chkViveConEstudiante.setSelected(true);
+        chkViveConEstudiante.setText("El Apoderado vive con el estudiante");
 
         jLabel21.setText("Nombres");
 
@@ -102,17 +103,22 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
 
         cboEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Seleccionar -", "Casado", "Divorciado", "Soltero", "Viudo", "Otro" }));
 
-        jLabel28.setText("Teléfono");
+        jLabel28.setText("Teléfono Fijo");
 
         jLabel30.setText("Móvil");
 
-        jLabel27.setText("Correo");
+        jLabel27.setText("Correo Electrónico");
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/new.png"))); // NOI18N
         btnNuevo.setText("Nuevo");
 
         btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/check.png"))); // NOI18N
         btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/save.png"))); // NOI18N
         btnGuardar.setText("Guardar");
@@ -168,9 +174,9 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
                             .addComponent(jLabel6))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCheckBox1)
+                            .addComponent(chkVive)
                             .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCheckBox2)
+                            .addComponent(chkViveConEstudiante)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txtCentroLaboral)
@@ -249,14 +255,15 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox1)
+                .addComponent(chkVive)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox2)
+                .addComponent(chkViveConEstudiante)
                 .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -324,7 +331,7 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(19, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -340,19 +347,25 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
         if (camposCompletos() == true) {
             ADPersona ADP;
             Persona objP;
+            Apoderado objA;
             java.sql.Date fechaNacimiento = new java.sql.Date(jdcFechaNacimiento.getDate().getTime());
             //Completndo campos del objeto Persona:
-            objP = new Persona();
-            objP.setApellidos(this.txtApellidos.getText());
-            objP.setNombres(this.txtNombres.getText());
-            objP.setFechaNacimiento(fechaNacimiento);
-            objP.setSexo(this.getSexo());
-            objP.setEstadoCivil(this.getEstadoCivil());
-            objP.setTipoDocumento(this.getTipoDoc());
-            objP.setNumeroDocumento(this.txtNumDocumento.getText());
-            objP.setTelefono(this.txtTelefono.getText());
-            objP.setMovil(this.txtMovil.getText());
-            objP.setCorreo(this.txtCorreo.getText());
+            objP = new Persona(txtApellidos.getText(), txtNombres.getText(), fechaNacimiento, this.getSexo(), this.getTipoDoc(), txtNumDocumento.getText(), this.getEstadoCivil(), txtTelefono.getText(), txtMovil.getText(), txtCorreo.getText());
+//            objP.setApellidos(this.txtApellidos.getText());
+//            objP.setNombres(this.txtNombres.getText());
+//            objP.setFechaNacimiento(fechaNacimiento);
+//            objP.setSexo(this.getSexo());
+//            objP.setEstadoCivil(this.getEstadoCivil());
+//            objP.setTipoDocumento(this.getTipoDoc());
+//            objP.setNumeroDocumento(this.txtNumDocumento.getText());
+//            objP.setTelefono(this.txtTelefono.getText());
+//            objP.setMovil(this.txtMovil.getText());
+//            objP.setCorreo(this.txtCorreo.getText());
+            
+            //Completndo campos del objeto Persona:
+            objA = new Apoderado(this.getVive(), this.getViveConEstudiante(), this.txtCentroLaboral.getText(), this.txtProfesion.getText(), this.txtCargo.getText());
+            
+
             try {
                 ADP = new ADPersona();
                 if (camposCompletos() == true) {
@@ -381,13 +394,17 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
             btnRegistrar.setEnabled(false);
             btnGuardar.setEnabled(true);
             btnModificar.setEnabled(false);
-           // this.actual = this.mtP.getPersona(pos);
+            // this.actual = this.mtP.getPersona(pos);
             this.presentarDatos();
             this.tblPersonas.setEnabled(false);
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una persona.");
         }
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnModificar;
@@ -396,8 +413,8 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox cboEstadoCivil;
     private javax.swing.JComboBox cboTipoDoc;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox chkVive;
+    private javax.swing.JCheckBox chkViveConEstudiante;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -429,7 +446,134 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 
-     private void iniciarComponentes() {
+    public void activarCampos(Boolean valor) {
+        txtNombres.setEnabled(valor);
+        txtApellidos.setEnabled(valor);
+        jdcFechaNacimiento.setEnabled(valor);
+        opcMasculino.setEnabled(valor);
+        opcFemenino.setEnabled(valor);
+        cboTipoDoc.setEnabled(valor);
+        cboEstadoCivil.setEnabled(valor);
+        txtNumDocumento.setEnabled(valor);
+        txtTelefono.setEnabled(valor);
+        txtMovil.setEnabled(valor);
+        txtCorreo.setEnabled(valor);
+        //tblPersonas.setEnabled(valor);
+    }
+
+    public boolean camposCompletos() {
+        boolean Completo = true;
+
+        if (this.txtNombres.getText().isEmpty()) {
+            faltaLlenar += "ERROR : Campo NOMBRES está vacio.\n";
+            Completo = false;
+        }
+        if (this.txtApellidos.getText().isEmpty()) {
+            faltaLlenar += "ERROR : Campo APELLIDO está vacio.\n";
+            Completo = false;
+        }
+        if (this.jdcFechaNacimiento.getDateFormatString().isEmpty()) {
+            faltaLlenar += "ERROR : Campo FECHA DE NACIMIENTO está vacio.\n";
+            Completo = false;
+        }
+        if (this.opcFemenino.isSelected() == false && this.opcMasculino.isSelected() == false) {
+            faltaLlenar += "ERROR : Campo SEXO está vacio.\n";
+            Completo = false;
+        }
+        if (this.cboTipoDoc.getSelectedIndex() < 0) {
+            faltaLlenar += "ERROR : Campo TIPO DE DOCUMENTO está vacio.\n";
+            Completo = false;
+        }
+        if (this.txtNumDocumento.getText().isEmpty()) {
+            faltaLlenar += "ERROR : Campo NÚMERO DE DOCUMENTO está vacio.\n";
+            Completo = false;
+        }
+        if (this.cboEstadoCivil.getSelectedIndex() < 0) {
+            faltaLlenar += "ERROR : Campo ESTADO CIVIL está vacio.\n";
+            Completo = false;
+        }
+        if (this.txtTelefono.getText().isEmpty()) {
+            faltaLlenar += "ERROR : Campo TELEFONO está vacio.\n";
+            Completo = false;
+        }
+        if (this.txtMovil.getText().isEmpty()) {
+            faltaLlenar += "ERROR : Campo MÓVIL está vacio.\n";
+            Completo = false;
+        }
+        if (this.txtCorreo.getText().isEmpty()) {
+            faltaLlenar += "ERROR : Campo CORREO está vacio.\n";
+            Completo = false;
+        }
+        return Completo;
+    }
+
+    private String getEstadoCivil() {
+        int index = cboEstadoCivil.getSelectedIndex();
+        String estCivil = null;
+        if (index == 1) {
+            estCivil = "C";
+        }
+        if (index == 2) {
+            estCivil = "D";
+        }
+        if (index == 3) {
+            estCivil = "S";
+        }
+        if (index == 4) {
+            estCivil = "V";
+        }
+        if (index == 5) {
+            estCivil = "O";
+        }
+
+        return estCivil;
+    }
+
+    private char getSexo() {
+        char sexo;
+        if (opcMasculino.isSelected()) {
+            sexo = 'M';
+        } else {
+            sexo = 'F';
+        }
+
+        return sexo;
+    }
+
+    private String getTipoDoc() {
+        String tipoDoc = null;
+        int index = this.cboTipoDoc.getSelectedIndex();
+        if (index == 1) {
+            tipoDoc = "DNI";
+        }
+        if (index == 2) {
+            tipoDoc = "OTR";
+        }
+
+        return tipoDoc;
+    }
+    
+    private boolean getVive(){
+        boolean vive;
+        if (this.chkVive.isSelected()) {
+            vive = true;
+        } else {
+            vive = false;
+        }
+        return vive;
+    }
+    
+    private boolean getViveConEstudiante(){
+        boolean viveConEstudiante;
+        if (this.chkViveConEstudiante.isSelected()) {
+            viveConEstudiante = true;
+        } else {
+            viveConEstudiante = false;
+        }
+        return viveConEstudiante;
+    }
+
+    private void iniciarComponentes() {
 //        jdcFechaNacimiento.setDate(Calendar.getInstance().getTime());
         limpiarCampos();
 //        btnModificar.setEnabled(true);
@@ -438,7 +582,7 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
         cboTipoDoc.setSelectedIndex(0);
         cboEstadoCivil.setSelectedIndex(0);
     }
-     
+
     public void limpiarCampos() {
         txtNombres.setText("");
         txtApellidos.setText("");
@@ -452,7 +596,7 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
         txtMovil.setText("");
         txtCorreo.setText("");
     }
-    
+
     private void listar() {
         ADApoderado ADApod = new ADApoderado();
         List<Apoderado> apoderados;
@@ -466,8 +610,8 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
             ADApod = null;
         }
     }
-    
-       private void presentarDatos() {
+
+    private void presentarDatos() {
         ADPersona ADP = new ADPersona();
 
         try {
@@ -525,112 +669,5 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
         } finally {
             ADP = null;
         }
-    }
-
-    public boolean camposCompletos() {
-        boolean Completo = true;
-
-        if (this.txtNombres.getText().isEmpty()) {
-            faltaLlenar += "ERROR : Campo NOMBRES está vacio.\n";
-            Completo = false;
-        }
-        if (this.txtApellidos.getText().isEmpty()) {
-            faltaLlenar += "ERROR : Campo APELLIDO está vacio.\n";
-            Completo = false;
-        }
-        if (this.jdcFechaNacimiento.getDateFormatString().isEmpty()) {
-            faltaLlenar += "ERROR : Campo FECHA DE NACIMIENTO está vacio.\n";
-            Completo = false;
-        }
-        if (this.opcFemenino.isSelected() == false && this.opcMasculino.isSelected() == false) {
-            faltaLlenar += "ERROR : Campo SEXO está vacio.\n";
-            Completo = false;
-        }
-        if (this.cboTipoDoc.getSelectedIndex() < 0) {
-            faltaLlenar += "ERROR : Campo TIPO DE DOCUMENTO está vacio.\n";
-            Completo = false;
-        }
-        if (this.txtNumDocumento.getText().isEmpty()) {
-            faltaLlenar += "ERROR : Campo NÚMERO DE DOCUMENTO está vacio.\n";
-            Completo = false;
-        }
-        if (this.cboEstadoCivil.getSelectedIndex() < 0) {
-            faltaLlenar += "ERROR : Campo ESTADO CIVIL está vacio.\n";
-            Completo = false;
-        }
-        if (this.txtTelefono.getText().isEmpty()) {
-            faltaLlenar += "ERROR : Campo TELEFONO está vacio.\n";
-            Completo = false;
-        }
-        if (this.txtMovil.getText().isEmpty()) {
-            faltaLlenar += "ERROR : Campo MÓVIL está vacio.\n";
-            Completo = false;
-        }
-        if (this.txtCorreo.getText().isEmpty()) {
-            faltaLlenar += "ERROR : Campo CORREO está vacio.\n";
-            Completo = false;
-        }
-        return Completo;
-    }
-
-    public void activarCampos(Boolean valor) {
-        txtNombres.setEnabled(valor);
-        txtApellidos.setEnabled(valor);
-        jdcFechaNacimiento.setEnabled(valor);
-        opcMasculino.setEnabled(valor);
-        opcFemenino.setEnabled(valor);
-        cboTipoDoc.setEnabled(valor);
-        cboEstadoCivil.setEnabled(valor);
-        txtNumDocumento.setEnabled(valor);
-        txtTelefono.setEnabled(valor);
-        txtMovil.setEnabled(valor);
-        txtCorreo.setEnabled(valor);
-        //tblPersonas.setEnabled(valor);
-    }
-
-    private char getSexo() {
-        char sexo;
-        if (opcMasculino.isSelected()) {
-            sexo = 'M';
-        } else {
-            sexo = 'F';
-        }
-
-        return sexo;
-    }
-
-    private String getEstadoCivil() {
-        int index = cboEstadoCivil.getSelectedIndex();
-        String estCivil = null;
-        if (index == 1) {
-            estCivil = "C";
-        }
-        if (index == 2) {
-            estCivil = "D";
-        }
-        if (index == 3) {
-            estCivil = "S";
-        }
-        if (index == 4) {
-            estCivil = "V";
-        }
-        if (index == 5) {
-            estCivil = "O";
-        }
-
-        return estCivil;
-    }
-
-    private String getTipoDoc() {
-        String tipoDoc = null;
-        int index = this.cboTipoDoc.getSelectedIndex();
-        if (index == 1) {
-            tipoDoc = "DNI";
-        }
-        if (index == 2) {
-            tipoDoc = "OTR";
-        }
-
-        return tipoDoc;
     }
 }

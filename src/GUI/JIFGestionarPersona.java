@@ -70,12 +70,6 @@ public class JIFGestionarPersona extends javax.swing.JInternalFrame {
 
         jLabel21.setText("Nombres");
 
-        txtNombres.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombresActionPerformed(evt);
-            }
-        });
-
         jLabel22.setText("Fecha de Nacimiento");
 
         jLabel23.setText("Tipo de Documento");
@@ -91,19 +85,8 @@ public class JIFGestionarPersona extends javax.swing.JInternalFrame {
 
         jLabel26.setText("N° Documento");
 
-        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCorreoActionPerformed(evt);
-            }
-        });
-
         rdoSexo.add(opcMasculino);
         opcMasculino.setText("Masculino");
-        opcMasculino.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opcMasculinoActionPerformed(evt);
-            }
-        });
 
         jLabel27.setText("Correo");
 
@@ -111,19 +94,7 @@ public class JIFGestionarPersona extends javax.swing.JInternalFrame {
 
         jLabel29.setText("Apellidos");
 
-        txtApellidos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidosActionPerformed(evt);
-            }
-        });
-
         jLabel30.setText("Móvil");
-
-        txtNumDocumento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumDocumentoActionPerformed(evt);
-            }
-        });
 
         cboTipoDoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- Seleccionar -", "DNI", "Otro" }));
 
@@ -330,20 +301,12 @@ public class JIFGestionarPersona extends javax.swing.JInternalFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombresActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombresActionPerformed
-
-    private void txtNumDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumDocumentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumDocumentoActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // TODO add your handling code here:
@@ -445,10 +408,6 @@ public class JIFGestionarPersona extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
-    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCorreoActionPerformed
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         if (camposCompletos() == true) {
@@ -490,14 +449,6 @@ public class JIFGestionarPersona extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void txtApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidosActionPerformed
-
-    private void opcMasculinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcMasculinoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_opcMasculinoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
@@ -692,4 +643,25 @@ public class JIFGestionarPersona extends javax.swing.JInternalFrame {
             ADP = null;
         }
     }
+    
+    
+    private Persona llenarPersona() {
+        Persona objP = null;
+        objP = new Persona();
+        java.sql.Date fechaNacimiento = new java.sql.Date(jdcFechaNacimiento.getDate().getTime());
+        //Completndo campos del objeto Persona:
+        objP.setApellidos(this.txtApellidos.getText());
+        objP.setNombres(this.txtNombres.getText());
+        objP.setFechaNacimiento(fechaNacimiento);
+        objP.setSexo(this.getSexo());
+        objP.setEstadoCivil(this.getEstadoCivil());
+        objP.setTipoDocumento(this.getTipoDoc());
+        objP.setNumeroDocumento(this.txtNumDocumento.getText());
+        objP.setTelefono(this.txtTelefono.getText());
+        objP.setMovil(this.txtMovil.getText());
+        objP.setCorreo(this.txtCorreo.getText());
+
+        return objP;
+    }
+
 }
