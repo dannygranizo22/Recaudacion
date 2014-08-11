@@ -4,7 +4,9 @@
  */
 package GUI;
 
+import AccesoDatos.ADUsuario;
 import AccesoDatos.Sql;
+import Entidades.Usuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,13 +15,15 @@ import javax.swing.JOptionPane;
  */
 public class JFLogin extends javax.swing.JFrame {
 
-    Sql sql = new Sql();
+    ADUsuario adUsuario = new ADUsuario();
+    Usuario usuario = new Usuario();
 
     /**
      * Creates new form JFLogin
      */
     public JFLogin() {
         initComponents();
+       
         this.setLocationRelativeTo(null);
     }
 
@@ -114,30 +118,29 @@ public class JFLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        String Usuario = txtUsuario.getText();
-        String Contraseña = String.valueOf( txtPassword.getPassword());
-
-        if (sql.existe("persona", "numerodocumento", Usuario)) {
-            String data[] = sql.getDatosUsuarios(Usuario);
-            if (String.valueOf(Contraseña).compareTo(data[0]) == 0) {
-                JOptionPane.showMessageDialog(this, "Acceso al Sistema: " + data[0]);
-                JFPrincipal principal = new JFPrincipal();
-                principal.setVisible(true);
-                this.setVisible(false);
-                /*if (String.valueOf(Usuario).compareTo("admin")==0) {
-                 principal.setMnuAdministrar();
-                 }*/
-            } else {
-                JOptionPane.showMessageDialog(this, "Contraseña Incorrecta");
-                txtPassword.setText("");
-                txtPassword.requestFocus();
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Usuario no Registrado");
-            txtUsuario.setText("");
-            txtPassword.setText("");
-            txtUsuario.requestFocus();
+        adUsuario = new ADUsuario();
+        this.usuario = new Usuario();
+        this.usuario.setNombre(txtUsuario.getText());
+        this.usuario.setClave(String.valueOf( txtPassword.getPassword()));
+        
+        try {
+            this.usuario = adUsuario.identificar(this.usuario);
+             if (this.usuario != null) {                 
+                 JFNumCaja numCaja = new JFNumCaja();
+                 numCaja.lblNombUsuario.setText(this.usuario.getPersona().getNombres() + this.usuario.getPersona().getApellidos());
+                 numCaja.setVisible(true);
+                 this.setVisible(false);
+            }else{
+                 JOptionPane.showMessageDialog(this,
+                         "Las credenciales no son validas");
+                 this.txtUsuario.setText("");
+                 this.txtPassword.setText("");
+                 this.txtUsuario.requestFocusInWindow();
+             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
+       
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

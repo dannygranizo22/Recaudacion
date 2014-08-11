@@ -23,7 +23,7 @@ public class ADCaja {
             cajas = new ArrayList<Caja>();
             while (rs.next() == true) {
                 objC = new Caja();
-                objC.setCodigo(rs.getInt("codigo"));
+                objC.setCodigo(rs.getString("codigo"));
                 objC.setNombre(rs.getString("nombre"));
                 objC.setVigencia(rs.getBoolean("vigencia"));
                 objC.setLocal(new Local());

@@ -4,7 +4,7 @@ public class Recaudacion {
     
     public static void main(String[] args) {
         // TODO code application logic here
-        JFPrincipal form = new JFPrincipal();
+        JFLogin form = new JFLogin();
         form.setVisible(true);
     }
 }

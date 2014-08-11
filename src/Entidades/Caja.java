@@ -1,13 +1,14 @@
 package Entidades;
 
 public class Caja {
-    private int codigo;
+    private String codigo;
     private int serie;
     private String nombre;
     private boolean vigencia;
     private Local local;
 
     public Caja(int serie, String nombre, boolean vigencia, Local local) {
+       
         this.serie = serie;
         this.nombre = nombre;
         this.vigencia = vigencia;
@@ -16,11 +17,11 @@ public class Caja {
     
     public Caja () {}
     
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
     
