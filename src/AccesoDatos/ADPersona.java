@@ -165,4 +165,25 @@ public class ADPersona {
             conex = null;
         }
     }
+
+    public int buscaPorDNI(String Dni) throws Exception {
+        int codigoPersona = -1;
+        Statement st = null;        
+        ResultSet rs = null;
+        String sql;
+        try {
+            sql = "SELECT codigo FROM persona WHERE numerodocumento = '" + Dni + "' ";
+            st = conex.Conectar().createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.next() == true) {
+                codigoPersona = rs.getInt("codigo");                
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            conex.Desconectar();
+            conex = null;
+        }
+        return codigoPersona;
+    }
 }

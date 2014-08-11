@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class Conexion {
     public Connection Con = null;
-    public String bd = "recaudacion";
+    public String bd = "Recaudacion";
     public String user = "postgres";
-    public String password = "123";
+    public String password = "1234";
     public final String CONTROLADOR_JDBC = "org.postgresql.Driver";
     public final String URL_BASEDEDATOS = "Jdbc:postgresql://localhost:5432/" + bd;
     
@@ -15,9 +15,6 @@ public class Conexion {
          try
         {
            Class.forName(CONTROLADOR_JDBC);
-           //Establecemos el Usuario y la contraseña
-           //Usuario= postgres
-           //Contraseña= 123
            Con = DriverManager.getConnection(URL_BASEDEDATOS,user,password);
            if (Con !=null){
                System.out.println("Conexión a base de datos ... Ok");

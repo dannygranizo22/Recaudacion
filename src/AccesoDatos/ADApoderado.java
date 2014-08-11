@@ -56,4 +56,91 @@ public class ADApoderado {
         
         return apoderados;
     }
+
+    public void agregar(Apoderado objA) throws Exception {
+        Statement st = null;
+        String sql = null;
+        try {
+            sql = "INSERT INTO apoderado VALUES (  " 
+                    + objA.getCodigo() + " , "
+                    + objA.isVive() + " , "
+                    + objA.isViveConEstudiante() + " , '"
+                    + objA.getCentroLaboral() + "' , '"
+                    + objA.getProfesion() + "' , '"
+                    + objA.getCargo() + "' )";
+            st = conex.Conectar().createStatement();
+            st.executeUpdate(sql);
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            conex.Desconectar();
+            conex = null;
+        }
+    }
+
+    public void modifcar(Apoderado objA) throws Exception {
+        Statement st;
+        String sql;
+        try {
+            sql = "UPDATE apoderado SET " 
+                    + "  centrolaboral = '" + objA.getCentroLaboral()
+                    + "' , profesion = '" + objA.getProfesion()
+                    + "' , cargo = '" + objA.getCargo()
+                    + "' , vive = " + objA.isVive()
+                    + " , viveconestudiante = " + objA.isViveConEstudiante()
+                    + " WHERE codigo = " + objA.getCodigo();
+            st= conex.Conectar().createStatement();
+            st.executeUpdate(sql);
+        } catch (Exception e) {
+            throw e;
+        }finally{
+            conex.Desconectar();
+            conex = null;
+        }
+    }
+
+    public Apoderado leer(Apoderado actual) throws Exception {
+        Apoderado objAp = null;
+        Statement st;
+        ResultSet rs;
+        String sql;
+        
+        try {
+            sql = "SELECT P.apellidos, P.nombres, P.telefono, P.movil, P.correo, P.fechanacimiento, " + 
+                    "     P.sexo, P.tipodocumento, P.numerodocumento, P.estadocivil, A.centrolaboral, A.profesion, A.cargo, " + 
+                    "     A.vive, A.viveconestudiante " + 
+                    " FROM persona P INNER JOIN apoderado A ON P.codigo = " + actual.getCodigo() + " AND P.codigo = A.codigo";
+            st = conex.Conectar().createStatement();
+            rs = st.executeQuery(sql);
+            
+            if(rs.next() == true){
+                objAp = new Apoderado();
+                //Datos de Persona:
+                objAp.setCodigo(actual.getCodigo());
+                objAp.setApellidos(rs.getString("apellidos"));
+                objAp.setNombres(rs.getString("nombres"));
+                objAp.setFechaNacimiento(rs.getDate("fechanacimiento"));
+                objAp.setSexo(rs.getString("sexo").charAt(0));
+                objAp.setTipoDocumento(rs.getString("tipodocumento"));
+                objAp.setNumeroDocumento(rs.getString("numerodocumento"));
+                objAp.setEstadoCivil(rs.getString("estadocivil"));
+                objAp.setTelefono(rs.getString("telefono"));
+                objAp.setMovil(rs.getString("movil"));
+                objAp.setCorreo(rs.getString("correo"));
+                //Datos de Apoderado:
+                objAp.setCentroLaboral(rs.getString("centrolaboral"));
+                objAp.setProfesion(rs.getString("profesion"));
+                objAp.setCargo(rs.getString("cargo"));
+                objAp.setVive(rs.getBoolean("vive"));
+                objAp.setViveConEstudiante(rs.getBoolean("viveconestudiante"));
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            conex.Desconectar();;
+            conex = null;
+        }
+        
+        return objAp;
+    }
 }

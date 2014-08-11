@@ -12,13 +12,13 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
 
     private String faltaLlenar = "";
     private ModeloTablaApoderado mtA;
-    private Persona actual;
+    private Apoderado actual;
 
     public JIFGestionarApoderado() {
         mtA = new ModeloTablaApoderado();
         this.listar();
-        this.iniciarComponentes();
         initComponents();
+        this.iniciarComponentes();
     }
 
     @SuppressWarnings("unchecked")
@@ -111,6 +111,11 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/new.png"))); // NOI18N
         btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
 
         btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/check.png"))); // NOI18N
         btnRegistrar.setText("Registrar");
@@ -269,6 +274,11 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/res/close.png"))); // NOI18N
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Seleccione Persona"));
 
@@ -291,7 +301,7 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnModificar)))
@@ -303,8 +313,8 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -316,13 +326,13 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 614, Short.MAX_VALUE)
                         .addComponent(btnSalir)
-                        .addGap(29, 29, 29))))
+                        .addGap(29, 29, 29))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,10 +341,10 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(19, Short.MAX_VALUE))
+                        .addContainerGap(15, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26))))
         );
@@ -348,9 +358,9 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
             ADPersona ADP;
             Persona objP;
             Apoderado objA;
+            ADApoderado ADAp;
             java.sql.Date fechaNacimiento = new java.sql.Date(jdcFechaNacimiento.getDate().getTime());
             //Completndo campos del objeto Persona:
-            objP = new Persona(txtApellidos.getText(), txtNombres.getText(), fechaNacimiento, this.getSexo(), this.getTipoDoc(), txtNumDocumento.getText(), this.getEstadoCivil(), txtTelefono.getText(), txtMovil.getText(), txtCorreo.getText());
 //            objP.setApellidos(this.txtApellidos.getText());
 //            objP.setNombres(this.txtNombres.getText());
 //            objP.setFechaNacimiento(fechaNacimiento);
@@ -361,20 +371,25 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
 //            objP.setTelefono(this.txtTelefono.getText());
 //            objP.setMovil(this.txtMovil.getText());
 //            objP.setCorreo(this.txtCorreo.getText());
-            
+            objP = new Persona(txtApellidos.getText(), txtNombres.getText(), fechaNacimiento, this.getSexo(), this.getTipoDoc(), txtNumDocumento.getText(), this.getEstadoCivil(), txtTelefono.getText(), txtMovil.getText(), txtCorreo.getText());
+
             //Completndo campos del objeto Persona:
             objA = new Apoderado(this.getVive(), this.getViveConEstudiante(), this.txtCentroLaboral.getText(), this.txtProfesion.getText(), this.txtCargo.getText());
-            
 
             try {
                 ADP = new ADPersona();
+                ADAp = new ADApoderado();
+                
                 if (camposCompletos() == true) {
                     objP.setCodigo(this.actual.getCodigo());
+                    objA.setCodigo(this.actual.getCodigo());
                     ADP.modificar(objP);
+                    ADAp.modifcar(objA);
                     listar();
-                    iniciarComponentes();
-                    this.tblPersonas.setEnabled(true);
-                    btnRegistrar.setEnabled(false);
+                    activarCampos(false);
+                    btnGuardar.setEnabled(false);
+                    tblPersonas.setEnabled(true);
+                    btnModificar.setEnabled(true);
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage().toString());
@@ -394,7 +409,7 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
             btnRegistrar.setEnabled(false);
             btnGuardar.setEnabled(true);
             btnModificar.setEnabled(false);
-            // this.actual = this.mtP.getPersona(pos);
+            this.actual = this.mtA.getApoderado(pos);
             this.presentarDatos();
             this.tblPersonas.setEnabled(false);
         } else {
@@ -404,7 +419,49 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
+        if (this.camposCompletos() == true) {
+            ADPersona ADP;
+            ADApoderado ADAp;
+            Persona objP;
+            Apoderado objA;
+            int codigoPersona;
+            java.sql.Date fechaNacimiento = new java.sql.Date(jdcFechaNacimiento.getDate().getTime());
+
+            objP = new Persona(txtApellidos.getText(), txtNombres.getText(), fechaNacimiento, this.getSexo(), this.getTipoDoc(), txtNumDocumento.getText(), this.getEstadoCivil(), txtTelefono.getText(), txtMovil.getText(), txtCorreo.getText());
+            objA = new Apoderado(this.getVive(), this.getViveConEstudiante(), this.txtCentroLaboral.getText(), this.txtProfesion.getText(), this.txtCargo.getText());
+            try {
+                ADP = new ADPersona();
+                ADAp = new ADApoderado();
+                
+                ADP.agregar(objP);
+                codigoPersona = this.buscarPorDNI(this.txtNumDocumento.getText());
+                if (codigoPersona != -1){                    
+                    objA.setCodigo(codigoPersona);
+                    ADAp.agregar(objA);
+                    listar();
+                    activarCampos(false);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage().toString());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, faltaLlenar);
+            faltaLlenar = "";
+        }
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+        activarCampos(true);
+        iniciarComponentes();
+        this.tblPersonas.setEnabled(true);
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnModificar;
@@ -458,9 +515,31 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
         txtTelefono.setEnabled(valor);
         txtMovil.setEnabled(valor);
         txtCorreo.setEnabled(valor);
+        txtCentroLaboral.setEnabled(valor);
+        txtProfesion.setEnabled(valor);
+        txtCargo.setEnabled(valor);
+        chkVive.setEnabled(valor);
+        chkViveConEstudiante.setEnabled(valor);
         //tblPersonas.setEnabled(valor);
     }
-
+    
+    private int buscarPorDNI(String Dni) {
+        int codigoPersona;
+        ADPersona ADP;
+        try {
+            ADP = new ADPersona();
+            codigoPersona = ADP.buscaPorDNI(Dni);
+            if (codigoPersona != -1){
+                return codigoPersona;
+            }
+        } catch (Exception e) { 
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ADP = null;
+        }
+        return -1;
+    }
+    
     public boolean camposCompletos() {
         boolean Completo = true;
 
@@ -502,6 +581,18 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
         }
         if (this.txtCorreo.getText().isEmpty()) {
             faltaLlenar += "ERROR : Campo CORREO está vacio.\n";
+            Completo = false;
+        }
+        if (this.txtCentroLaboral.getText().isEmpty()) {
+            faltaLlenar += "ERROR : Campo CENTRO LABORAL está vacio.\n";
+            Completo = false;
+        }
+        if (this.txtProfesion.getText().isEmpty()) {
+            faltaLlenar += "ERROR : Campo PROFESIÓN está vacio.\n";
+            Completo = false;
+        }
+        if (this.txtCargo.getText().isEmpty()) {
+            faltaLlenar += "ERROR : Campo CARGO está vacio.\n";
             Completo = false;
         }
         return Completo;
@@ -552,8 +643,8 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
 
         return tipoDoc;
     }
-    
-    private boolean getVive(){
+
+    private boolean getVive() {
         boolean vive;
         if (this.chkVive.isSelected()) {
             vive = true;
@@ -562,8 +653,8 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
         }
         return vive;
     }
-    
-    private boolean getViveConEstudiante(){
+
+    private boolean getViveConEstudiante() {
         boolean viveConEstudiante;
         if (this.chkViveConEstudiante.isSelected()) {
             viveConEstudiante = true;
@@ -575,15 +666,15 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
 
     private void iniciarComponentes() {
 //        jdcFechaNacimiento.setDate(Calendar.getInstance().getTime());
-        limpiarCampos();
-//        btnModificar.setEnabled(true);
+        this.limpiarCampos();
+        btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(true);
         btnGuardar.setEnabled(false);
         cboTipoDoc.setSelectedIndex(0);
         cboEstadoCivil.setSelectedIndex(0);
     }
 
-    public void limpiarCampos() {
+    private void limpiarCampos() {
         txtNombres.setText("");
         txtApellidos.setText("");
         jdcFechaNacimiento.setDate(null);
@@ -595,6 +686,11 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
         txtTelefono.setText("");
         txtMovil.setText("");
         txtCorreo.setText("");
+        txtCentroLaboral.setText("");
+        txtProfesion.setText("");
+        txtCargo.setText("");
+        chkVive.setSelected(true);
+        chkViveConEstudiante.setSelected(true);
     }
 
     private void listar() {
@@ -612,10 +708,11 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
     }
 
     private void presentarDatos() {
-        ADPersona ADP = new ADPersona();
+        ADApoderado ADAp = new ADApoderado();
 
         try {
-            this.actual = ADP.leer(this.actual);
+            this.actual = ADAp.leer(this.actual);
+            
             if (this.actual != null) {
                 this.txtNombres.setText(this.actual.getNombres());
                 this.txtApellidos.setText(this.actual.getApellidos());
@@ -661,13 +758,20 @@ public class JIFGestionarApoderado extends javax.swing.JInternalFrame {
                 this.txtTelefono.setText(this.actual.getTelefono());
                 this.txtMovil.setText(this.actual.getMovil());
                 this.txtCorreo.setText(this.actual.getCorreo());
+                
+                this.txtCentroLaboral.setText(this.actual.getCentroLaboral());
+                this.txtProfesion.setText(this.actual.getProfesion());
+                this.txtCargo.setText(this.actual.getCargo());
+                this.chkVive.setSelected(this.actual.isVive());
+                this.chkViveConEstudiante.setSelected(this.actual.isViveConEstudiante());
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontró.");
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
-            ADP = null;
+            ADAp = null;
         }
     }
+    
 }

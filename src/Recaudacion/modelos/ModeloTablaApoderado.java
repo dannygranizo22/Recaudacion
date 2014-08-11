@@ -86,6 +86,14 @@ public class ModeloTablaApoderado extends AbstractTableModel {
         }
         return nombre;
     }
+
+    public Apoderado getApoderado(int pos) {
+        Apoderado objA = null;
+        if (this.apoderados != null) {
+            objA = this.apoderados.get(pos);
+        }
+        return objA;
+    }
     
     
 }
