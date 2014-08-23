@@ -1,6 +1,8 @@
 package Entidades;
 
-public class Personal {
+public class Personal 
+        extends Persona{
+    
     private String cargo;
     private boolean vigencia;
 
@@ -8,7 +10,9 @@ public class Personal {
         this.cargo = cargo;
         this.vigencia = vigencia;
     }
-
+    
+    public Personal(){}
+    
     public String getCargo() {
         return cargo;
     }

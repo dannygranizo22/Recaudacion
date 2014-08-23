@@ -10,6 +10,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     JIFGestionarInstitucion inst;
     JIFGestionarLocal loc;
     JIFGestionarApoderado apod;
+    JIFGestionarPersonal psnal;
     gestBanco banc;
     gestCuentaBancaria cuentaBan;
 
@@ -58,6 +59,11 @@ public class JFPrincipal extends javax.swing.JFrame {
         jMenu1.add(mnu_GApoderado);
 
         mnu_GPersonal.setText("Personal");
+        mnu_GPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_GPersonalActionPerformed(evt);
+            }
+        });
         jMenu1.add(mnu_GPersonal);
         jMenu1.add(jSeparator1);
 
@@ -183,6 +189,17 @@ public class JFPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, mensaje);
         }
     }//GEN-LAST:event_mnu_GApoderadoActionPerformed
+
+    private void mnu_GPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_GPersonalActionPerformed
+        // TODO add your handling code here:
+        if (estaCerrado(psnal) == true) {
+            psnal = new JIFGestionarPersonal();
+            panelEscritorio.add(psnal);
+            psnal.show();
+        } else {
+            JOptionPane.showMessageDialog(this, mensaje);
+        }
+    }//GEN-LAST:event_mnu_GPersonalActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
