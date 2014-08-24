@@ -11,6 +11,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     JIFGestionarLocal loc;
     JIFGestionarApoderado apod;
     JIFGestionarPersonal psnal;
+    JIFGestionarCaja caja;
     gestBanco banc;
     gestCuentaBancaria cuentaBan;
 
@@ -84,6 +85,11 @@ public class JFPrincipal extends javax.swing.JFrame {
         jMenu1.add(mnu_GLocal);
 
         mnu_GCaja.setText("Caja");
+        mnu_GCaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_GCajaActionPerformed(evt);
+            }
+        });
         jMenu1.add(mnu_GCaja);
         jMenu1.add(jSeparator2);
 
@@ -200,6 +206,17 @@ public class JFPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, mensaje);
         }
     }//GEN-LAST:event_mnu_GPersonalActionPerformed
+
+    private void mnu_GCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_GCajaActionPerformed
+        // TODO add your handling code here:
+        if (estaCerrado(caja) == true) {
+            caja = new JIFGestionarCaja();
+            panelEscritorio.add(caja);
+            caja.show();
+        } else {
+            JOptionPane.showMessageDialog(this, mensaje);
+        }
+    }//GEN-LAST:event_mnu_GCajaActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
