@@ -62,7 +62,7 @@ public class ADLocal {
         ResultSet rs = null;
         String sql = null;
         try {
-            sql = "SELECT L.codigo, L.nombre, L.direccion, L.telefono, I.nombre AS nombInstit, L.vigencia FROM local L JOIN institucion I ON L.codigoinstitucion = I.codigo";
+            sql = "SELECT L.codigo, L.nombre, L.direccion, L.telefono, I.codigo AS codInst, I.nombre AS nombInstit, L.vigencia FROM local L JOIN institucion I ON L.codigoinstitucion = I.codigo";
             st = conex.Conectar().createStatement();
             rs = st.executeQuery(sql);
             locales = new ArrayList<Local>();
@@ -73,6 +73,7 @@ public class ADLocal {
                 objL.setDireccion(rs.getString("direccion"));
                 objL.setTelefono(rs.getString("telefono"));
                 objL.setInstitucion(new Institucion());
+                objL.getInstitucion().setCodigo(rs.getInt("codInst"));
                 objL.getInstitucion().setNombre(rs.getString("nombInstit"));
                 objL.setVigencia(rs.getBoolean("vigencia"));
                 locales.add(objL);
@@ -102,7 +103,7 @@ public class ADLocal {
         ResultSet rs = null;
         String sql;
         try {
-            sql = "SELECT L.nombre, L.direccion, L.telefono, I.nombre AS nombInstit, L.tipoasistencia, L.vigencia FROM local L JOIN institucion I ON L.codigoinstitucion = I.codigo"
+            sql = "SELECT L.nombre, L.direccion, L.telefono, I.codigo, I.nombre AS nombInstit, L.tipoasistencia, L.vigencia FROM local L JOIN institucion I ON L.codigoinstitucion = I.codigo"
                     + " WHERE L.codigo = " + actual.getCodigo();
             st = conex.Conectar().createStatement();
             rs = st.executeQuery(sql);
@@ -113,6 +114,7 @@ public class ADLocal {
                 objL.setDireccion(rs.getString("direccion"));
                 objL.setTelefono(rs.getString("telefono"));
                 objL.setInstitucion(new Institucion());
+                objL.getInstitucion().setCodigo(rs.getInt("codigo"));
                 objL.getInstitucion().setNombre(rs.getString("nombInstit"));
                 objL.setTipoAsistencia(rs.getString("tipoasistencia"));
                 objL.setVigencia(rs.getBoolean("vigencia"));
