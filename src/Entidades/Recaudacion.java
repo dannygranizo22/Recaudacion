@@ -1,17 +1,20 @@
 package Entidades;
 
 public class Recaudacion {
+    private int codigo;
     private String fechaIncio;
     private String fechaFinal;
     private int codigoPersona;
-    private int codigoCaja;
+    private Caja caja;
 
-    public Recaudacion(String fechaIncio, String fechaFinal, int codigoPersona, int codigoCaja) {
-        this.fechaIncio = fechaIncio;
-        this.fechaFinal = fechaFinal;
-        this.codigoPersona = codigoPersona;
-        this.codigoCaja = codigoCaja;
+    public int getCodigo() {
+        return codigo;
     }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
 
     public String getFechaIncio() {
         return fechaIncio;
@@ -37,12 +40,13 @@ public class Recaudacion {
         this.codigoPersona = codigoPersona;
     }
 
-    public int getCodigoCaja() {
-        return codigoCaja;
+    public Caja getCaja() {
+        return caja;
     }
 
-    public void setCodigoCaja(int codigoCaja) {
-        this.codigoCaja = codigoCaja;
+    public void setCaja(Caja caja) {
+        this.caja = caja;
     }
+
     
 }

@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class Conexion {
     public Connection Con = null;
-    public String bd = "Recaudacion";
+    public String bd = "recaudacion";
     public String user = "postgres";
-    public String password = "1234";
+    public String password = "123";
     public final String CONTROLADOR_JDBC = "org.postgresql.Driver";
     public final String URL_BASEDEDATOS = "Jdbc:postgresql://localhost:5432/" + bd;
     

@@ -1,10 +1,10 @@
 package GUI;
 
-public class Recaudacion {
+public class InicioRecaudacion {
     
     public static void main(String[] args) {
         // TODO code application logic here
-        JFPrincipal form = new JFPrincipal();
+        JFLogin form = new JFLogin();
         form.setVisible(true);
 //        JFLogin form = new JFLogin();
 //        form.setVisible(true);

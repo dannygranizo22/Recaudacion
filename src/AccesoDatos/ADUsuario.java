@@ -20,7 +20,7 @@ public class ADUsuario {
         ResultSet rs = null;
         String sql;
         
-        sql = "SELECT U.codigo, P.apellidos, P.nombres FROM Usuario U JOIN Persona P"
+        sql = "SELECT U.codigo,P.codigo AS codPersona,P.apellidos, P.nombres FROM Usuario U JOIN Persona P"
                + " ON P.codigo = U.codigopersona"
                + " WHERE U.vigencia = TRUE"
                + " AND U.nombre = '" + user.getNombre()
@@ -33,6 +33,7 @@ public class ADUsuario {
                 us = new Usuario();
                 us.setCodigo(rs.getInt("codigo"));
                 us.setPersona(new Persona());
+                us.getPersona().setCodigo(rs.getInt("codPersona"));
                 us.getPersona().setApellidos(rs.getString("apellidos"));
                 us.getPersona().setNombres(rs.getString("nombres"));
               

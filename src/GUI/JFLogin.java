@@ -128,6 +128,7 @@ public class JFLogin extends javax.swing.JFrame {
              if (this.usuario != null) {                 
                  JFNumCaja numCaja = new JFNumCaja();
                  numCaja.lblNombUsuario.setText(this.usuario.getPersona().getNombres() + this.usuario.getPersona().getApellidos());
+                 numCaja.lblcodUsuario.setText(String.valueOf(this.usuario.getPersona().getCodigo()));
                  numCaja.setVisible(true);
                  this.setVisible(false);
             }else{

@@ -1,10 +1,13 @@
 package GUI;
 
+import AccesoDatos.ADRecaudacion;
+import Entidades.Recaudacion;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 public class JFPrincipal extends javax.swing.JFrame {
-
+    ADRecaudacion adRecaudacion = new ADRecaudacion();
+    
     private String mensaje = "La ventana ya esta abierta.";
     JIFGestionarPersona pers;
     JIFGestionarInstitucion inst;
@@ -15,8 +18,11 @@ public class JFPrincipal extends javax.swing.JFrame {
     gestBanco banc;
     gestCuentaBancaria cuentaBan;
 
+    
+    
     public JFPrincipal() {
         initComponents();
+       // lblcodRecaudacion.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -25,6 +31,8 @@ public class JFPrincipal extends javax.swing.JFrame {
 
         rdoSexo = new javax.swing.ButtonGroup();
         panelEscritorio = new javax.swing.JDesktopPane();
+        lblcodRecaudacion = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnu_GPersona = new javax.swing.JMenuItem();
@@ -37,9 +45,19 @@ public class JFPrincipal extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         mnu_GBanco = new javax.swing.JMenuItem();
         mnu_GCuentaBancaria = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        mnu = new javax.swing.JMenu();
+        mnu_CerrarSesion = new javax.swing.JMenuItem();
+        mnu_Salir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblcodRecaudacion.setForeground(new java.awt.Color(51, 51, 51));
+        lblcodRecaudacion.setText("codRecaudacion");
+        lblcodRecaudacion.setToolTipText("");
+        lblcodRecaudacion.setBounds(1114, 624, 80, 30);
+        panelEscritorio.add(lblcodRecaudacion, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jLabel1.setText("jLabel1");
 
         jMenu1.setText("Gestionar");
 
@@ -111,8 +129,20 @@ public class JFPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        mnu.setText("Sistema");
+
+        mnu_CerrarSesion.setText("Cerrar Sesión");
+        mnu_CerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_CerrarSesionActionPerformed(evt);
+            }
+        });
+        mnu.add(mnu_CerrarSesion);
+
+        mnu_Salir.setText(" Salir");
+        mnu.add(mnu_Salir);
+
+        jMenuBar1.add(mnu);
 
         setJMenuBar(jMenuBar1);
 
@@ -218,6 +248,27 @@ public class JFPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnu_GCajaActionPerformed
 
+    private void mnu_CerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_CerrarSesionActionPerformed
+        Recaudacion objRec;
+        objRec = new Recaudacion();
+        objRec.setCodigo(Integer.parseInt(lblcodRecaudacion.getText()));
+        
+        adRecaudacion = new ADRecaudacion();
+             try {
+                  if (adRecaudacion.modificar(objRec)) {
+                    JOptionPane.showMessageDialog(this, "Recaudacion Finalizada");
+                    JFLogin from = new JFLogin();
+                    from.setVisible(true);
+                    this.setVisible(false);
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al fializar recaudacion");
+                }
+             } catch (Exception e) {
+                 JOptionPane.showMessageDialog(this, e.getMessage());
+             }
+    }//GEN-LAST:event_mnu_CerrarSesionActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -251,11 +302,14 @@ public class JFPrincipal extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    public javax.swing.JLabel lblcodRecaudacion;
+    private javax.swing.JMenu mnu;
+    private javax.swing.JMenuItem mnu_CerrarSesion;
     private javax.swing.JMenuItem mnu_GApoderado;
     private javax.swing.JMenuItem mnu_GBanco;
     private javax.swing.JMenuItem mnu_GCaja;
@@ -264,6 +318,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnu_GLocal;
     private javax.swing.JMenuItem mnu_GPersona;
     private javax.swing.JMenuItem mnu_GPersonal;
+    private javax.swing.JMenuItem mnu_Salir;
     private javax.swing.JDesktopPane panelEscritorio;
     private javax.swing.ButtonGroup rdoSexo;
     // End of variables declaration//GEN-END:variables

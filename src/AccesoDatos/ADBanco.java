@@ -16,7 +16,7 @@ import java.util.List;
 public class ADBanco {
     
     Conexion BD = new Conexion();
-    Sql SQL = new Sql();
+ 
     private ResultSet resulset;
     public String modificar;
     public String delete;
