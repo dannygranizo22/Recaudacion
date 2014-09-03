@@ -1,7 +1,11 @@
 package GUI;
 
 import AccesoDatos.ADRecaudacion;
+import Entidades.Persona;
 import Entidades.Recaudacion;
+import Entidades.Usuario;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
@@ -22,7 +26,8 @@ public class JFPrincipal extends javax.swing.JFrame {
     
     public JFPrincipal() {
         initComponents();
-       // lblcodRecaudacion.setVisible(false);
+       lblcodRecaudacion.setVisible(false);
+       lblcodPersona.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -32,6 +37,7 @@ public class JFPrincipal extends javax.swing.JFrame {
         rdoSexo = new javax.swing.ButtonGroup();
         panelEscritorio = new javax.swing.JDesktopPane();
         lblcodRecaudacion = new javax.swing.JLabel();
+        lblcodPersona = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -56,6 +62,11 @@ public class JFPrincipal extends javax.swing.JFrame {
         lblcodRecaudacion.setToolTipText("");
         lblcodRecaudacion.setBounds(1114, 624, 80, 30);
         panelEscritorio.add(lblcodRecaudacion, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        lblcodPersona.setForeground(new java.awt.Color(102, 102, 102));
+        lblcodPersona.setText("codPersona");
+        lblcodPersona.setBounds(1120, 610, 60, 20);
+        panelEscritorio.add(lblcodPersona, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jLabel1.setText("jLabel1");
 
@@ -249,13 +260,31 @@ public class JFPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnu_GCajaActionPerformed
 
     private void mnu_CerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_CerrarSesionActionPerformed
-        Recaudacion objRec;
-        objRec = new Recaudacion();
-        objRec.setCodigo(Integer.parseInt(lblcodRecaudacion.getText()));
-        
-        adRecaudacion = new ADRecaudacion();
-             try {
-                  if (adRecaudacion.modificar(objRec)) {
+       
+        int opt = JOptionPane.showConfirmDialog(this, "¿Esta Seguro de Terminar la Recaudción?", "", JOptionPane.YES_NO_OPTION);
+
+        if (opt == JOptionPane.YES_OPTION) {
+            Recaudacion objR;
+            objR = new Recaudacion();
+            Usuario objU;
+            objU = new Usuario();
+            objU.setPersona(new Persona());
+            objU.getPersona().setCodigo(Integer.parseInt(lblcodPersona.getText()));
+            try {
+                objR = adRecaudacion.leer(objU);
+            } catch (Exception ex) {
+                Logger.getLogger(JFPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.lblcodRecaudacion.setText(String.valueOf(objR.getCodigo()));
+
+
+            Recaudacion objRec;
+            objRec = new Recaudacion();
+            objRec.setCodigo(Integer.parseInt(lblcodRecaudacion.getText()));
+
+            adRecaudacion = new ADRecaudacion();
+            try {
+                if (adRecaudacion.modificar(objRec)) {
                     JOptionPane.showMessageDialog(this, "Recaudacion Finalizada");
                     JFLogin from = new JFLogin();
                     from.setVisible(true);
@@ -264,9 +293,10 @@ public class JFPrincipal extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Error al fializar recaudacion");
                 }
-             } catch (Exception e) {
-                 JOptionPane.showMessageDialog(this, e.getMessage());
-             }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+        }
     }//GEN-LAST:event_mnu_CerrarSesionActionPerformed
 
     public static void main(String args[]) {
@@ -307,6 +337,7 @@ public class JFPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    public javax.swing.JLabel lblcodPersona;
     public javax.swing.JLabel lblcodRecaudacion;
     private javax.swing.JMenu mnu;
     private javax.swing.JMenuItem mnu_CerrarSesion;

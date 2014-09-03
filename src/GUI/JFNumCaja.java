@@ -29,7 +29,7 @@ public class JFNumCaja extends javax.swing.JFrame {
     public JFNumCaja() {
         initComponents();       
         this.setLocationRelativeTo(null);
-        //lblcodUsuario.setVisible(false);
+        lblcodUsuario.setVisible(false);
         
       
      }
@@ -154,10 +154,7 @@ public class JFNumCaja extends javax.swing.JFrame {
                   if (adRecaudacion.registrar(objRec)) {
                     JOptionPane.showMessageDialog(this, "Recaudacion Inicializada");
                     JFPrincipal from = new JFPrincipal();
-                    Recaudacion objR;
-                    objR = new Recaudacion();
-                    objR = adRecaudacion.leer(objRec);
-                    from.lblcodRecaudacion.setText(String.valueOf(objR.getCodigo()));
+                    from.lblcodPersona.setText(String.valueOf(objRec.getCodigoPersona()));
                     from.setVisible(true);
                     this.setVisible(false);
 

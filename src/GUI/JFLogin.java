@@ -4,8 +4,10 @@
  */
 package GUI;
 
+import AccesoDatos.ADRecaudacion;
 import AccesoDatos.ADUsuario;
 import AccesoDatos.Sql;
+import Entidades.Recaudacion;
 import Entidades.Usuario;
 import javax.swing.JOptionPane;
 
@@ -17,6 +19,8 @@ public class JFLogin extends javax.swing.JFrame {
 
     ADUsuario adUsuario = new ADUsuario();
     Usuario usuario = new Usuario();
+    ADRecaudacion adRecaudacion = new ADRecaudacion();
+    Recaudacion recaudacion = new Recaudacion();
 
     /**
      * Creates new form JFLogin
@@ -119,18 +123,38 @@ public class JFLogin extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         adUsuario = new ADUsuario();
+        adRecaudacion = new ADRecaudacion();
         this.usuario = new Usuario();
+        
         this.usuario.setNombre(txtUsuario.getText());
         this.usuario.setClave(String.valueOf( txtPassword.getPassword()));
         
         try {
             this.usuario = adUsuario.identificar(this.usuario);
-             if (this.usuario != null) {                 
-                 JFNumCaja numCaja = new JFNumCaja();
-                 numCaja.lblNombUsuario.setText(this.usuario.getPersona().getNombres() + this.usuario.getPersona().getApellidos());
-                 numCaja.lblcodUsuario.setText(String.valueOf(this.usuario.getPersona().getCodigo()));
-                 numCaja.setVisible(true);
-                 this.setVisible(false);
+            if (this.usuario != null) {
+                recaudacion = new Recaudacion();
+                recaudacion = adRecaudacion.leer(this.usuario);
+                if (recaudacion != null) {
+                    if (recaudacion.getFechaIncio().equals(recaudacion.getFechaFinal())) {
+                        JOptionPane.showMessageDialog(this, "Su Recaudacion ha sido Renaudada");
+                        JFPrincipal principal = new JFPrincipal();
+                        principal.setVisible(true);
+                        this.setVisible(false);
+                    } else {
+                        JFNumCaja numCaja = new JFNumCaja();
+                        numCaja.lblNombUsuario.setText(this.usuario.getPersona().getNombres() + this.usuario.getPersona().getApellidos());
+                        numCaja.lblcodUsuario.setText(String.valueOf(this.usuario.getPersona().getCodigo()));
+                        numCaja.setVisible(true);
+                        this.setVisible(false);
+                    }
+                } else {
+                    JFNumCaja numCaja = new JFNumCaja();
+                    numCaja.lblNombUsuario.setText(this.usuario.getPersona().getNombres() + this.usuario.getPersona().getApellidos());
+                    numCaja.lblcodUsuario.setText(String.valueOf(this.usuario.getPersona().getCodigo()));
+                    numCaja.setVisible(true);
+                    this.setVisible(false);
+                }
+
             }else{
                  JOptionPane.showMessageDialog(this,
                          "Las credenciales no son validas");

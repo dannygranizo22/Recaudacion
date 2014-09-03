@@ -6,6 +6,7 @@ package AccesoDatos;
 
 
 import Entidades.Recaudacion;
+import Entidades.Usuario;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -40,21 +41,23 @@ public class ADRecaudacion {
         return ok;
    }
      
-        public Recaudacion leer(Recaudacion actual) throws Exception {
+        public Recaudacion leer(Usuario actual) throws Exception {
         Recaudacion objR = null;
         Statement st = null;
         ResultSet rs = null;
         String sql;
         try {
             sql = "SELECT codigo,fechainicio,fechafinal,codigopersonal,codigocaja FROM recaudacion"
-                    + " WHERE codigopersonal = 82 ORDER BY codigo DESC LIMIT 1";
+                    + " WHERE codigopersonal = " + actual.getPersona().getCodigo() + " ORDER BY codigo DESC LIMIT 1";
                         
             st = conex.Conectar().createStatement();
             rs = st.executeQuery(sql);
             
             if (rs.next() == true) {
                 objR = new Recaudacion();
-                objR.setCodigo(rs.getInt("codigo"));          
+                objR.setCodigo(rs.getInt("codigo"));
+                objR.setFechaIncio(rs.getString("fechainicio"));
+                objR.setFechaFinal(rs.getString("fechafinal"));
               
             }
         } catch (Exception e) {
@@ -88,4 +91,6 @@ public class ADRecaudacion {
         
         return ok;
     }
+      
+      
 }
